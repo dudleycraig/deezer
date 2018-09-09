@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dudleycraig/deezer.functional.org.za.git"
+    "url": "git+https://github.com/dudleycraig/deezer.git"
   },
   "author": "Dudley Craig <dudleycraig@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dudleycraig/deezer.functional.org.za/issues"
+    "url": "https://github.com/dudleycraig/deezer/issues"
   },
-  "homepage": "https://github.com/dudleycraig/deezer.functional.org.za#readme",
+  "homepage": "https://github.com/dudleycraig/deezer#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "4.1.3",
