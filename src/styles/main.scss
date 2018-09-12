@@ -329,6 +329,57 @@ div#session {
    }
 }
 
+.tracks {
+   table-layout:fixed;
+   width:100%;
+   padding:4px;
+   margin:0;
+   border-collapse:separate;
+   border-spacing:0;
+}
+table.tracks > caption {
+   display:table-header-group;
+   font-weight:600;
+   font-size:1.4em;
+   color:$fg-body;
+   white-space:nowrap;
+}
+table.tracks > tbody {
+   background:$bg-context;
+   border:1px solid $bg-context-border;
+   border-radius:5px;
+}
+table.tracks colgroup {  }
+table.tracks colgroup > col {  }
+table.tracks thead { margin:0; padding:0; }
+table.tracks tfoot { margin:0; padding:0; }
+table.tracks tbody { margin:0; padding:0; }
+table.tracks td, table.tracks th { padding:1px 0; margin:0; }
+table.tracks th { text-align:center; }
+table.tracks td { 
+   display:table-cell; 
+   vertical-align:middle; 
+   height:2em; 
+   padding:0 5px;
+   line-height:2em; 
+}
+table.tracks > thead td {
+   color:$fg-context-active;
+   font-weight:600;
+}
+table.tracks > tbody td {
+   color:$fg-context;
+   border-bottom:2px solid $bg-body;
+}
+table.tracks > tbody tr:hover * {
+   color:$fg-context-active;
+}
+table.tracks colgroup > col.id { width:100px; }
+table.tracks colgroup > col.title {  }
+table.tracks colgroup > col.artist { width:200px; }
+table.tracks colgroup > col.duration { width:80px; }
+table.tracks colgroup > col.released { width:140px; }
+
 #search {
    form.inline {
       display:inline-block;
@@ -373,3 +424,4 @@ div#session {
       color:$fg-context-active;
    }
 }
+

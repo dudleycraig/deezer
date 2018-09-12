@@ -31,28 +31,28 @@ const Breadcrumbs = () => (
 
 const App = props => {
   return (
-      <Router>
-        <div>
-          <div id="session">
-            <span className="deezer-logo">
-               <img src="images/logo.png" />
-            </span>
-            <span className="breadcrumbs">
-              <Breadcrumbs />
-            </span>
-          </div>
-          <ul className="navigation main">
-            <li className="left"><NavLink exact activeClassName="active" to="/">Home</NavLink></li>
-            <li className="middle"><NavLink exact activeClassName="active" to="/search">Search</NavLink></li>
-            <li className="right"><NavLink exact activeClassName="active" to="/about">About</NavLink></li>
-          </ul>
-          <Switch>
-            <Route exact path="/" component={Home}></Route>
-            <Route path="/search" component={Search}></Route>
-            <Route path="/about" component={About}></Route>
-          </Switch>
+    <Router>
+      <div>
+        <div id="session">
+          <span className="deezer-logo">
+             <img src="images/logo.png" />
+          </span>
+          <span className="breadcrumbs">
+            <Breadcrumbs />
+          </span>
         </div>
-      </Router>
+        <ul className="navigation main">
+          <li className="left"><NavLink exact activeClassName="active" to="/">Home</NavLink></li>
+          <li className="middle"><NavLink exact activeClassName="active" to="/search">Search</NavLink></li>
+          <li className="right"><NavLink exact activeClassName="active" to="/about">About</NavLink></li>
+        </ul>
+        <Switch>
+          <Route exact path="/" component={Home}></Route>
+          <Route path="/search" component={Search}></Route>
+          <Route path="/about" component={About}></Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
