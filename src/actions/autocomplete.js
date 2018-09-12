@@ -38,7 +38,7 @@ export const autocompleteErrorHandler = error => {
 export const autocompleteSearch = input => {
   const query = 'https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/artist/autocomplete?q=' + input;
   return dispatch => {
-    return fetch(query, {method:'get'})
+    return fetch(query, {method:'get', mode:'cors'})
       .then(response => {
           if(!response.ok) {
             throw Error('Failed querying Deezer.'); 
