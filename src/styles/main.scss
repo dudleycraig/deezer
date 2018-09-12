@@ -289,6 +289,46 @@ div#session {
    }
 }
 
+.list {
+   display:inline-block;
+   height:150px;
+   overflow:hidden;
+   list-style:none;
+   clear:both;
+   padding:0;
+   margin:20px 0;
+
+   li {
+      float:left;
+      clear:none;
+      margin:4px 20px 0 0;
+
+      img {
+         float:left;
+         clear:both;
+         width:120px;
+         height:120px;
+         border-radius:5px;
+         border:1px solid $bg-context-border;
+      }
+
+      span {
+         float:left;
+         clear:both;
+         display:inline-block;
+         width:120px;
+         height:28px;
+         font-size:0.7em;
+         overflow:hidden;
+         text-overflow:ellipsis;
+         clear:both;
+         text-align:center;
+         white-space:nowrap;
+      }
+
+   }
+}
+
 #search {
    form.inline {
       display:inline-block;

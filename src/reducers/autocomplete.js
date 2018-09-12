@@ -36,18 +36,6 @@ export default (state = initialState, action = {}) => {
         status:action.status
       };
 
-    case typesAutocomplete.AUTOCOMPLETE_REQUEST:
-      return {
-        ...state,
-        status:'fetching-artists',
-        messages:{
-          count:(state.messages.counter + 1),
-          hash:{
-            [state.messages.counter + 1]:{id:state.messages.counter + 1, status:"info", message:"updating autocomplete list.", date:new Date()}
-          }
-        }
-      };
-
     case typesAutocomplete.AUTOCOMPLETE_SUCCESS:
       return {
         ...state,

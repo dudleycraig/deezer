@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {autocompleteSearch, updateAutocompleteInput} from 'actions/autocomplete';
+import {albumsSearch} from 'actions/albums';
 import Autocomplete from 'components/Autocomplete';
 
 const Search = props => {
@@ -8,6 +9,12 @@ const Search = props => {
     props.updateAutocompleteInput(event.target.value);
     if(event.target.value !== '') {
       props.autocompleteSearch(event.target.value);
+    }
+  }
+
+  const albumsSearchHandler = event => {
+    if(event.target.value !== '') {
+      props.albumsSearch(props.autocomplete.input);
     }
   }
 
@@ -27,9 +34,10 @@ const Search = props => {
         <input 
           type="submit" 
           value="Search" 
+          onClick={e => albumsSearchHandler(e)}
         />
         <ul className="messages search" style={(Object.keys(props.autocomplete.messages.hash).length > 0 && props.autocomplete.input !== '') ? {display:'block'} : {display:'none'}}>
-        { 
+        {/**
           Object.keys(props.autocomplete.messages.hash).length > 0 && 
           Object.keys(props.autocomplete.messages.hash).reverse().map(key => {
             const message = props.autocomplete.messages.hash[key];
@@ -46,17 +54,33 @@ const Search = props => {
               </li>
             );
           })
-        }
+         **/}
         </ul>
       </form>
       <Autocomplete autocomplete={props.autocomplete} autocompleteClickHandler={autocompleteClickHandler} />
+      <ul className="list album">
+      {
+        Object.keys(props.albums.hash).length > 0 &&
+        Object.keys(props.albums.hash).map(key => {
+          const album = props.albums.hash[key];
+          return (
+            <li key={key}>
+              <a>
+                <img src={album.cover} />
+                <span>{album.title}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+      </ul>
     </div>
   );
 };
 
 const SearchContainer = connect(
   state => state,
-  {autocompleteSearch, updateAutocompleteInput}
+  {autocompleteSearch, updateAutocompleteInput, albumsSearch}
 )(Search);
 
 export {SearchContainer as Search};
