@@ -4,7 +4,6 @@ import {types as typesAlbums} from 'types/albums';
 
 export const albumsSuccessHandler = results => {
   return dispatch => {
-    console.log('results to hash', results.map(row => row.album).filter((album, index, albums) => albums.map(item => item['id']).indexOf(album['id']) === index).reduce((albums, album) => (albums[album.id] = album, albums), {}));
     dispatch({
       type:typesAlbums.ALBUMS_SUCCESS, 
       hash:results.map(row => row.album).filter((album, index, albums) => albums.map(item => item['id']).indexOf(album['id']) === index).reduce((albums, album) => (albums[album.id] = album, albums), {})

@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {autocompleteSearch, updateAutocompleteInput} from 'actions/autocomplete';
 import {albumsSearch} from 'actions/albums';
+import {tracksSearch} from 'actions/tracks';
 import Autocomplete from 'components/Autocomplete';
 
 const Search = props => {
@@ -22,6 +23,10 @@ const Search = props => {
     props.updateAutocompleteInput(input);
   };
 
+  const albumClickHandler = album => {
+    props.tracksSearch(album);
+  };
+
   return (
     <div className="context" id="search">
       <form className="inline">
@@ -37,7 +42,7 @@ const Search = props => {
           onClick={e => albumsSearchHandler(e)}
         />
         <ul className="messages search" style={(Object.keys(props.autocomplete.messages.hash).length > 0 && props.autocomplete.input !== '') ? {display:'block'} : {display:'none'}}>
-        {/**
+        {
           Object.keys(props.autocomplete.messages.hash).length > 0 && 
           Object.keys(props.autocomplete.messages.hash).reverse().map(key => {
             const message = props.autocomplete.messages.hash[key];
@@ -54,7 +59,7 @@ const Search = props => {
               </li>
             );
           })
-         **/}
+        }
         </ul>
       </form>
       <Autocomplete autocomplete={props.autocomplete} autocompleteClickHandler={autocompleteClickHandler} />
@@ -65,7 +70,7 @@ const Search = props => {
           const album = props.albums.hash[key];
           return (
             <li key={key}>
-              <a>
+              <a onClick={e => albumClickHandler(album)}>
                 <img src={album.cover} />
                 <span>{album.title}</span>
               </a>
@@ -74,13 +79,49 @@ const Search = props => {
         })
       }
       </ul>
+      <table className="tracks">
+        <caption>{props.tracks.album.title}</caption>
+        <colgroup>
+           <col className="id" />
+           <col className="title" />
+           <col className="artist" />
+           <col className="duration" />
+           <col className="released" />
+        </colgroup>
+        <thead>
+          <tr>
+            <td className="id">#</td>
+            <td className="title">Title</td>
+            <td className="artist">Artist</td>
+            <td className="duration">Duration</td>
+            <td className="released">Released</td>
+          </tr>
+        </thead>
+        <tbody>
+        {
+          Object.keys(props.tracks.hash).length > 0 &&
+          Object.keys(props.tracks.hash).map(key => {
+            const track = props.tracks.hash[key];
+            return(
+              <tr key={key}>
+                <td>{track.id}</td>
+                <td>{track.title_short}</td>
+                <td>{track.artist.name}</td>
+                <td>{('0' + Math.floor(track.duration / 60)).slice(-3) + ':' + ('0' + Math.floor(track.duration % 60)).slice(-2)}</td>
+                <td>{track.isrc}</td>
+              </tr>
+            );
+          })
+        }
+        </tbody>
+      </table>
     </div>
   );
 };
 
 const SearchContainer = connect(
   state => state,
-  {autocompleteSearch, updateAutocompleteInput, albumsSearch}
+  {autocompleteSearch, updateAutocompleteInput, albumsSearch, tracksSearch}
 )(Search);
 
 export {SearchContainer as Search};
