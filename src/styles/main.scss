@@ -7,13 +7,27 @@ $fg-success: green;
 
 $bg-body:#1c1c1c;
 $fg-body:#00c7f2;
+$fg-body-active:#c1f1fc;
+$fg-body-text:#444444;
+$fg-body-text-active:#000000;
 
-$bg-context: #2a2a2a;
-$fg-context: #e8e8e8;
+$bg-context:#2a2a2a;
+$fg-context:#aaaaaa;
+$fg-context-active:#ffffff;
+
+$bg-context-border: #222222;
+$fg-context-border: #aaaaaa;
+
+$bg-input: #232323;
+$fg-input: #8a8a8a;
+
+$bg-button: #01ffff;
+$fg-button: #011011;
 
 .error { color: $fg-error; }
 .warning { color: $fg-warning; }
 .success { color: $fg-success; }
+
 
 * {
    font-family: 'Roboto Condensed', sans-serif;
@@ -23,6 +37,7 @@ html {
    box-sizing: border-box;
    height: 100%;
    width: 100%;
+   overflow: -moz-scrollbars-vertical;
 }
 
 body {
@@ -87,33 +102,6 @@ button, .navigation > li {
    }
 }
 
-div#session {
-   position:relative;
-   top:0px;
-   width:100%;
-   height:40px;
-   line-height:40px;
-   margin-bottom:10px;
-   background:$bg-context;
-   border-bottom:1px solid $bg-context-border;
-
-   span.deezer-logo {
-      float:left;
-      clear:left;
-      padding:0 20px;
-
-      img {
-         display:inline-block;
-         width:117px;
-         height:24px;
-         vertical-align:middle;
-      }
-   }
-
-   span.breadcrumbs {
-   }
-}
-
 .navigation.main {
    display:inline-block;
    width:100%;
@@ -163,6 +151,85 @@ div#session {
    }
 }
 
+
+form.inline {
+   padding:0; 
+   margin:0;
+
+   input {
+      float:left; 
+      clear:none;
+      background: $fg-body;
+      margin:0;
+      padding:3px 5px;
+      border:1px solid #000;
+      border-radius:5px;
+      width:80px;
+   }
+
+   input[type="text"] {
+      background:$bg-context;
+      color:$fg-context;
+      border-color:$bg-context-border;
+   }
+
+   input.left {
+      border-radius:5px 0 0 5px;
+   }
+
+   input.middle {
+      border-radius:0;
+   }
+
+   input.right {
+      border-radius:0 5px 5px 0;
+   }
+
+   input[type="button"], input[type="submit"] {
+      background:$fg-body;
+      color:$fg-body-text;
+      cursor:pointer;
+   }
+
+   input[type="button"]:hover, input[type="submit"]:hover {
+      background:$fg-body-active;
+      color:$fg-body-text-active;
+   }
+
+   input.active {
+      background:$fg-body-active;
+      color:$fg-body-text-active;
+      pointer-events:none;
+   }
+}
+
+div#session {
+   position:relative;
+   top:0px;
+   width:100%;
+   height:40px;
+   line-height:40px;
+   margin-bottom:10px;
+   background:$bg-context;
+   border-bottom:1px solid $bg-context-border;
+
+   span.deezer-logo {
+      float:left;
+      clear:left;
+      padding:0 20px;
+
+      img {
+         display:inline-block;
+         width:117px;
+         height:24px;
+         vertical-align:middle;
+      }
+   }
+
+   span.breadcrumbs {
+   }
+}
+
 #app {
    height: 100%;
    width:100%;
@@ -185,6 +252,17 @@ div#session {
             font-weight:600;
             padding-left:8px;
          }
+      }
+   }
+}
+
+#search {
+   form.inline {
+      display:inline-block;
+      clear:both;
+      input[type="text"] {
+         width:400px;
+         margin-right:10px;
       }
    }
 }

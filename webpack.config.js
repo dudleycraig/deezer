@@ -71,7 +71,7 @@ module.exports = {
           { loader: 'style-loader' }, 
           { loader: 'css-loader', options: { module: true } }, // translate css into js 
           { loader: 'postcss-loader', options: { plugins: () => [ require('autoprefixer')({ 'browsers': ['> 1%', 'last 2 versions']}) ]} },
-          { loader: 'sass-loader' }, // compiles sass/scss to css 
+          { loader: 'sass-loader' } // compiles sass/scss to css 
         ]
       },
       {
@@ -93,6 +93,6 @@ module.exports = {
     inline: true,
     hot: true,
     host: 'invictus-frontend-assignment.local',
-    port: 8080,
+    port: 80
   }
 };
