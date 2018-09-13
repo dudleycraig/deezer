@@ -1,16 +1,61 @@
-# Deezer React App
-[Demo](https://deezer.functional.org.za)
+# deezer react/redux application 
+[Demo](https://functional.org.za)
 
-## Notes
+![dynamic screenshot](https://raw.githubusercontent.com/dudleycraig/deezer/master/screencast.gif)
 
-### Workflow
+## installation
 
-### ESLint
+### clone repository
 
-### App structure
+> git clone https://github.com/dudleycraig/deezer.git deezer
 
-## Installation
+### update config to reflect your environment
 
-### Run app
+> vim webpack.config.js
+change key 'host:' to your dev servers' domain
+module.exports = { 
+   ...
+   devServer: { 
+      ...
+      host:'*your-servers-domain.com*'
+   } 
+} 
 
-### Build app
+### pull node modules
+
+> npm install
+
+### run server in development mode
+
+> sudo npm start
+
+## app structure
+package.json         | application package requirements
+webpack.config.js    | build environment configuration
+.babelrc             | versions of javascript compiled and supported
+.eslintignore        | files for the linter to ignore
+.eslintrc.json       | configuration for both the editor(vim) and environment
+.tern-project        | vim, eslint and syntastic integration
+.vimrc               | editor configurations
+dist/                | output of built files
+ |- index.js         | packaged application archive
+public/              | hosting environment
+ |- index.html       | application entry point
+ |- images           | application resource images
+vendor/              | 3rd party libraries not included within node repositories
+ |- DZ.js            | deezer 3rd party client API
+src/                 | javascript and sass source files
+ |- actions/         | redux action creators and business logic
+ |- components/      | react components
+ |- containers/      | react containers
+ |- reducers/        | redux state mappings
+ |- styles/          | sass (scss) style source
+ |- types/           | redux event types
+ |- index.js         | react application entry point
+ |- store.js         | redux state handler configuration
+
+
+## workflow
+
+console based, event driven
+
