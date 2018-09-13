@@ -4,7 +4,7 @@ import {types as typesAutocomplete} from 'types/autocomplete';
 
 const initialState = { 
   mode:'artist',
-  status:'no-input',
+  status:'',
   input:'',
   hash:{},
   messages:{
@@ -26,20 +26,25 @@ export default (state = initialState, action = {}) => {
       return {
         ...state, 
         input:action.input,
-        status:(action.input !== '' ? 'has-input' : 'has-no-input'),
         hash:{}
       };
 
-    case typesAutocomplete.AUTOCOMPLETE_UPDATE_STATUS: 
+    case typesAutocomplete.AUTOCOMPLETE_REQUEST:
       return {
-        ...state, 
-        status:action.status
+        ...state,
+        status:action.status,
+        messages:{
+          count:(state.messages.counter + 1),
+          hash:{
+            [state.messages.counter + 1]:{id:state.messages.counter + 1, status:"info", message:"fetching autocomplete list.", date:new Date()}
+          }
+        }
       };
 
     case typesAutocomplete.AUTOCOMPLETE_SUCCESS:
       return {
         ...state,
-        status:(action.input !== '' ? 'has-input' : 'has-no-input'),
+        status:action.status,
         hash:action.hash,
         messages:{
           count:(state.messages.counter + 1),
@@ -52,7 +57,7 @@ export default (state = initialState, action = {}) => {
     case typesAutocomplete.AUTOCOMPLETE_ERROR:
       return {
         ...state,
-        status:'error',
+        status:action.status,
         messages:{
           count:(state.messages.counter + 1),
           hash:{

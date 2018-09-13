@@ -3,6 +3,7 @@
 import {types as typesAlbums} from 'types/albums';
 
 const initialState = { 
+  status:'',
   hash:{},
   messages:{
     max:1,
@@ -13,6 +14,12 @@ const initialState = {
 
 export default (state = initialState, action = {}) => {
   switch(action.type) {
+    case typesAlbums.ALBUMS_REQUEST:
+      return {
+        ...state,
+        status:action.status
+      }
+
     case typesAlbums.ALBUMS_SUCCESS:
       return {
         ...state,

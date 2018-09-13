@@ -24,10 +24,12 @@ $fg-input: #8a8a8a;
 $bg-button: #01ffff;
 $fg-button: #011011;
 
+$spinner: '../../public/images/spinner.gif';
+
 .error { color: $fg-error; }
 .warning { color: $fg-warning; }
 .success { color: $fg-success; }
-
+.info { color: $fg-context; }
 
 * {
    font-family: 'Roboto Condensed', sans-serif;
@@ -50,12 +52,20 @@ body {
 }
 
 button, .navigation > li {
-   background: $fg-body;
    margin:3px;
    padding:3px 5px;
    border:1px solid #000;
    border-radius:5px;
+   background-color: $fg-body;
 }
+
+.loading {
+   color:transparent; 
+   background-repeat:no-repeat; 
+   background-position:center; 
+   background-image:url($spinner);
+}
+
 
 .navigation {
    list-style:none;
@@ -196,6 +206,14 @@ form.inline {
       color:$fg-body-text-active;
    }
 
+   input[type="button"].loading, input[type="submit"].loading {
+      color:transparent; 
+      background-color:$fg-body-active;
+      background-repeat:no-repeat; 
+      background-position:center; 
+      background-image:url($spinner);
+   }
+      
    input.active {
       background:$fg-body-active;
       color:$fg-body-text-active;
@@ -290,7 +308,7 @@ div#session {
 }
 
 .list {
-   display:inline-block;
+   display:block;
    height:150px;
    overflow:hidden;
    list-style:none;
@@ -325,7 +343,30 @@ div#session {
          text-align:center;
          white-space:nowrap;
       }
+   }
 
+   li:hover {
+      cursor:pointer;
+
+      img {
+         border:1px solid #ffffff;
+      }
+   }
+
+   li.loading {
+      background-repeat:no-repeat; 
+      background-position:center; 
+      background-image:url($spinner);
+
+      img {
+         border:1px solid #ffffff;
+      }
+   }
+
+   li.active {
+      img {
+         border:1px solid #ffffff;
+      }
    }
 }
 
@@ -336,51 +377,58 @@ div#session {
    margin:0;
    border-collapse:separate;
    border-spacing:0;
+
+   caption {
+      display:table-header-group;
+      font-weight:600;
+      font-size:1.4em;
+      color:$fg-body;
+      white-space:nowrap;
+   }
+
+   tbody {
+      background:$bg-context;
+      border:1px solid $bg-context-border;
+      border-radius:5px;
+   }
+
+   colgroup {  }
+   colgroup > col {  }
+   thead, tbody, tfoot { 
+      margin:0; padding:0; 
+   }
+   td, table.tracks th { padding:1px 0; margin:0; }
+   th { 
+      text-align:center; 
+   }
+   td { 
+      display:table-cell; 
+      vertical-align:middle; 
+      height:2em; 
+      padding:0 5px;
+      line-height:2em; 
+   }
+   thead td {
+      color:$fg-context-active;
+      font-weight:600;
+   }
+   tbody td {
+      color:$fg-context;
+      border-bottom:2px solid $bg-body;
+   }
+   tbody tr:hover * {
+      color:$fg-context-active;
+   }
+   colgroup > col.id { width:100px; }
+   colgroup > col.title {  }
+   colgroup > col.artist { width:200px; }
+   colgroup > col.duration { width:80px; }
+   colgroup > col.released { width:140px; }
 }
-table.tracks > caption {
-   display:table-header-group;
-   font-weight:600;
-   font-size:1.4em;
-   color:$fg-body;
-   white-space:nowrap;
-}
-table.tracks > tbody {
-   background:$bg-context;
-   border:1px solid $bg-context-border;
-   border-radius:5px;
-}
-table.tracks colgroup {  }
-table.tracks colgroup > col {  }
-table.tracks thead { margin:0; padding:0; }
-table.tracks tfoot { margin:0; padding:0; }
-table.tracks tbody { margin:0; padding:0; }
-table.tracks td, table.tracks th { padding:1px 0; margin:0; }
-table.tracks th { text-align:center; }
-table.tracks td { 
-   display:table-cell; 
-   vertical-align:middle; 
-   height:2em; 
-   padding:0 5px;
-   line-height:2em; 
-}
-table.tracks > thead td {
-   color:$fg-context-active;
-   font-weight:600;
-}
-table.tracks > tbody td {
-   color:$fg-context;
-   border-bottom:2px solid $bg-body;
-}
-table.tracks > tbody tr:hover * {
-   color:$fg-context-active;
-}
-table.tracks colgroup > col.id { width:100px; }
-table.tracks colgroup > col.title {  }
-table.tracks colgroup > col.artist { width:200px; }
-table.tracks colgroup > col.duration { width:80px; }
-table.tracks colgroup > col.released { width:140px; }
 
 #search {
+   position:relative;
+
    form.inline {
       display:inline-block;
       clear:both;
@@ -400,9 +448,9 @@ table.tracks colgroup > col.released { width:140px; }
 }
 
 #autocomplete {
-   top:0;
+   top:39px;
    z-index:99;
-   position:relative;
+   position:absolute;
    width:400px;
    margin:5px 0;
    padding:0 6px;
