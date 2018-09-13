@@ -14,7 +14,7 @@ const Search = props => {
   }
 
   const albumsSearchHandler = event => {
-    if(event.target.value !== '') {
+    if(props.autocomplete.input !== '') {
       props.albumsSearch(props.autocomplete.input);
     }
   }
@@ -30,16 +30,12 @@ const Search = props => {
   return (
     <div className="context" id="search">
       <form className="inline">
-        <input 
-          type="text" 
-          placeholder="Search albums by artist name"
-          value={props.autocomplete.input}
-          onChange={e => autocompleteSearchHandler(e)}
-        />
+        <input type="text" placeholder="Search albums by artist name" value={props.autocomplete.input} onChange={e => autocompleteSearchHandler(e)} />
         <input 
           type="submit" 
           value="Search" 
-          onClick={e => albumsSearchHandler(e)}
+          onClick={e => albumsSearchHandler(e)} 
+          className={props.albums.status === 'loading' && 'loading'}
         />
         <ul className="messages search" style={(Object.keys(props.autocomplete.messages.hash).length > 0 && props.autocomplete.input !== '') ? {display:'block'} : {display:'none'}}>
         {
@@ -69,7 +65,11 @@ const Search = props => {
         Object.keys(props.albums.hash).map(key => {
           const album = props.albums.hash[key];
           return (
-            <li key={key}>
+            <li key={key} className={
+              ((props.tracks.album.id === album.id && props.tracks.status === 'loading' && 'loading') + 
+              ' ' + 
+              (props.tracks.album.id === album.id && 'active'))
+            }>
               <a onClick={e => albumClickHandler(album)}>
                 <img src={album.cover} />
                 <span>{album.title}</span>
